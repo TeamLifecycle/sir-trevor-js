@@ -54,6 +54,16 @@ var getTextFromBlock = function(blocks) {
   return helpers.browser.executeScript(str);
 };
 
+var focusOnTextBlock = function(index) {
+  index = index || 0;
+  return helpers.findElementsByCss('.st-text-block').then(function(elements) {
+    return helpers.browser.actions()
+              .mouseMove(elements[index], {x: 5, y: 30})
+              .click()
+              .perform();
+  });
+};
+
 var getTextBeforeCaret = function(index) {
   index = index || 0;
   var str = "var currentSelection = function(scribe) {";
@@ -67,7 +77,7 @@ var getTextBeforeCaret = function(index) {
 };
 
 var textblockHasFocus = function(textBlock) {
-  var str = "return document.activeElement === arguments[0];";
+  var str = "console.log(arguments[0]); console.log(document.activeElement); console.log(arguments[0] === document.activeElement); return document.activeElement === arguments[0];";
   return helpers.browser.executeScript(str, textBlock);
 };
 
@@ -91,14 +101,14 @@ describe('Text block', function() {
   describe('Pressing Enter', function() {
 
     it('should create a new block', function(done) {
-      helpers.focusOnTextBlock().then(pressEnter)
+      focusOnTextBlock().then(pressEnter)
         .then(function() {
           return helpers.hasBlockCount(2);
         }).then(done);
     });
 
     it('should copy the text after the caret to a new block', function(done) {
-      helpers.focusOnTextBlock().then(pressRight)
+      focusOnTextBlock().then(pressRight)
         .then(pressEnter)
         .then(function() {
           return getTextFromBlock([0, 1]);
@@ -110,7 +120,7 @@ describe('Text block', function() {
     });
 
     it('should add a breakline when combined with shift', function(done) {
-      helpers.focusOnTextBlock().then(pressShiftEnter).then(pressShift)
+      focusOnTextBlock().then(pressShiftEnter).then(pressShift)
         .then(function() {
           return getTextFromBlock([0]);
         }).then(function(htmlArr) {
@@ -124,7 +134,7 @@ describe('Text block', function() {
   describe('Pressing Backspace', function() {
 
     it('should delete a character', function(done) {
-      helpers.focusOnTextBlock().then(pressRight).then(pressBackSpace)
+      focusOnTextBlock().then(pressRight).then(pressBackSpace)
         .then(function() {
           return getTextFromBlock([0]);
         }).then(function(htmlArr) {
@@ -134,39 +144,33 @@ describe('Text block', function() {
     });
 
     it('should delete the block when caret is at the start of the block and there is a block above', function(done) {
-      helpers.focusOnTextBlock().then(pressRight).then(pressRight).then(pressRight)
-        .then( function() {
-          helpers.createBlock('text', function() {
-            helpers.hasBlockCount(2).then( function() {
-              return helpers.focusOnTextBlock(1);
-            }).then(pressBackSpace)
-              .then(function() {
-                return helpers.hasBlockCount(1);
-              }).then(done);
-          });
-        });
+      helpers.createBlock('text', function() {
+        helpers.hasBlockCount(2).then( function() {
+          return focusOnTextBlock(1);
+        }).then(pressBackSpace)
+          .then(function() {
+            return helpers.hasBlockCount(1);
+          }).then(done);
+      });
     });
 
     it('should transpose the block content when caret is at the start of the block and there is a block above', function(done) {
-      helpers.focusOnTextBlock().then(pressRight).then(pressRight).then(pressRight)
-        .then( function() {
-          helpers.createBlock('text', function() {
-            helpers.hasBlockCount(2).then( function() {
-              return helpers.focusOnTextBlock(1);
-            }).then( function() {
-              return enterText("Two");
-            }).then(pressLeft)
-              .then(pressLeft)
-              .then(pressLeft)
-              .then(pressBackSpace)
-              .then(function() {
-                return getTextFromBlock([0]);
-              }).then(function(htmlArr) {
-                expect(htmlArr[0]).toBe("<p>OneTwo</p>");
-                done();
-              });
+      helpers.createBlock('text', function() {
+        helpers.hasBlockCount(2).then( function() {
+          return focusOnTextBlock(1);
+        }).then( function() {
+          return enterText("Two");
+        }).then(pressLeft)
+          .then(pressLeft)
+          .then(pressLeft)
+          .then(pressBackSpace)
+          .then(function() {
+            return getTextFromBlock([0]);
+          }).then(function(htmlArr) {
+            expect(htmlArr[0]).toBe("<p>OneTwo</p>");
+            done();
           });
-        });
+      });
     });
 
   });
@@ -174,7 +178,7 @@ describe('Text block', function() {
   describe('Pressing Left', function() {
 
     it('should move 1 character to the left', function(done) {
-      helpers.focusOnTextBlock().then( function() {
+      focusOnTextBlock().then( function() {
         return enterText("T");
       })
       .then(getTextBeforeCaret)
@@ -190,24 +194,21 @@ describe('Text block', function() {
     });
 
     it('should at the start of the block move to the previous block', function(done) {
-      helpers.focusOnTextBlock().then(pressRight).then(pressRight).then(pressRight)
-        .then( function() {
-          helpers.createBlock('text', function() {
-          helpers.focusOnTextBlock(1)
-            .then(function() {
-              return getTextBeforeCaret(1);
-            })
-            .then(function(text) {
-              expect(text).toBe("");
-            })
-            .then(pressLeft)
-            .then(getTextBeforeCaret)
-            .then(function(text) {
-              expect(text).toBe("One");
-              done();
-            });
+      helpers.createBlock('text', function() {
+        focusOnTextBlock(1)
+          .then(function() {
+            return getTextBeforeCaret(1);
+          })
+          .then(function(text) {
+            expect(text).toBe("");
+          })
+          .then(pressLeft)
+          .then(getTextBeforeCaret)
+          .then(function(text) {
+            expect(text).toBe("One");
+            done();
           });
-        });
+      });
     });
 
   });
@@ -215,7 +216,7 @@ describe('Text block', function() {
     describe('Pressing Right', function() {
 
     it('should move right 1 character', function(done) {
-      helpers.focusOnTextBlock()
+      focusOnTextBlock()
         .then(getTextBeforeCaret)
         .then(function(text) {
           expect(text).toBe("");
@@ -231,35 +232,32 @@ describe('Text block', function() {
 
     it('should at the end of the block move to the next block', function(done) {
       var textfield;
-      helpers.focusOnTextBlock().then(pressRight).then(pressRight).then(pressRight)
-        .then( function() {
-          helpers.createBlock('text', function() {
-            helpers.findElementsByCss('.st-text-block')
-              .then(function(fields) {
-                textfield = fields[fields.length-1];
-              })
-              .then(function() {
-                return helpers.focusOnTextBlock(0);
-              })
-              .then(function() {
-                return getTextBeforeCaret(0);
-              })
-              .then(function(text) {
-                expect(text).toBe("");
-              })
-              .then(pressRight)
-              .then(pressRight)
-              .then(pressRight)
-              .then(pressRight)
-              .then(function() {
-                return textblockHasFocus(textfield);
-              })
-              .then(function(result) {
-                expect(result).toBe(true);
-                done();
-              });
+      helpers.createBlock('text', function() {
+        helpers.findElementsByCss('.st-text-block')
+          .then(function(fields) {
+            textfield = fields[fields.length-1];
+          })
+          .then(function() {
+            return focusOnTextBlock(0);
+          })
+          .then(function() {
+            return getTextBeforeCaret(0);
+          })
+          .then(function(text) {
+            expect(text).toBe("");
+          })
+          .then(pressRight)
+          .then(pressRight)
+          .then(pressRight)
+          .then(pressRight)
+          .then(function() {
+            return textblockHasFocus(textfield);
+          })
+          .then(function(result) {
+            expect(result).toBe(true);
+            done();
           });
-        });
+      });
     });
 
   });

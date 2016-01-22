@@ -84,8 +84,10 @@ describe('Format Bar', function() {
     var parent;
     helpers.findElementByCss('.st-text-block').then( function(element) {
       parent = element;
-    }).then(function() {
-      return helpers.focusOnTextBlock();
+      return helpers.browser.actions()
+                .mouseMove(parent, {x: 0, y: 30})
+                .click()
+                .perform();
     }).then(selectBoldText)
       .then(selectItalicText)
       .then(selectLinkText)
@@ -103,4 +105,5 @@ describe('Format Bar', function() {
       done();
     });
   });
+
 });

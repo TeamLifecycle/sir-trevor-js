@@ -30,7 +30,7 @@ Block.prototype.constructor = Block;
 Object.assign(Block.prototype, SimpleBlock.fn, require('./block-validations'), {
 
   bound: [
-    "_handleContentPaste", "_onFocus", "_onBlur", "onDrop", "onDeleteClick",
+    "_handleContentPaste", "_handleContentSubmit", "_onFocus", "_onBlur", "onDrop", "onDeleteClick",
     "clearInsertedStyles", "getSelectionForFormatter", "onBlockRender",
     "onDeleteConfirm"
   ],
@@ -51,11 +51,14 @@ Object.assign(Block.prototype, SimpleBlock.fn, require('./block-validations'), {
 
   toolbarEnabled: true,
 
-  availableMixins: ['droppable', 'pastable', 'uploadable', 'fetchable',
+  availableMixins: ['droppable', 'pastable', 'socialable', 'uploadable', 'fetchable',
     'ajaxable', 'controllable', 'multi_editable', 'textable'],
+
+  everything: this,
 
   droppable: false,
   pastable: false,
+  socialable: false,
   uploadable: false,
   fetchable: false,
   ajaxable: false,
@@ -64,6 +67,7 @@ Object.assign(Block.prototype, SimpleBlock.fn, require('./block-validations'), {
 
   drop_options: {},
   paste_options: {},
+  social_options: {},
   upload_options: {},
 
   formattable: true,
@@ -87,6 +91,7 @@ Object.assign(Block.prototype, SimpleBlock.fn, require('./block-validations'), {
   },
 
   render: function() {
+    console.trace();
     this.beforeBlockRender();
     this._setBlockInner();
 
@@ -120,7 +125,6 @@ Object.assign(Block.prototype, SimpleBlock.fn, require('./block-validations'), {
     if (this.formattable) { this._initFormatting(); }
 
     this._blockPrepare();
-
     return this;
   },
 
@@ -153,9 +157,13 @@ Object.assign(Block.prototype, SimpleBlock.fn, require('./block-validations'), {
    //Can be overwritten, although hopefully this will cover most situations.
    //If you want to get the data of your block use block.getBlockData()
   _serializeData: function() {
-    utils.log("toData for " + this.blockID);
+    // utils.log("toData for " + this.blockID, this.editor.dataset.stAlign);
 
     var data = {};
+
+    // if(this.editor.dataset && this.editor.dataset.stAlign && this.editor.dataset.stAlign.length) {
+    //   data.align = this.editor.dataset.stAlign;
+    // }
 
     //[> Simple to start. Add conditions later <]
     if (this.hasTextBlock()) {
@@ -186,10 +194,6 @@ Object.assign(Block.prototype, SimpleBlock.fn, require('./block-validations'), {
     Array.prototype.forEach.call(this.getTextBlock(), function(el) {
       el.focus();
     });
-  },
-
-  focusAtEnd: function() {
-    this.focus();
   },
 
   blur: function() {
@@ -285,6 +289,10 @@ Object.assign(Block.prototype, SimpleBlock.fn, require('./block-validations'), {
 
   _handleContentPaste: function(ev) {
     setTimeout(this.onContentPasted.bind(this, ev, ev.currentTarget), 0);
+  },
+
+  _handleContentSubmit: function(ev) {
+    setTimeout(this.onContentSubmit.bind(this, ev, ev.currentTarget), 0);
   },
 
   _getBlockClass: function() {
@@ -403,12 +411,7 @@ Object.assign(Block.prototype, SimpleBlock.fn, require('./block-validations'), {
     // Remove any whitespace in the first node, otherwise selections won't work.
     var firstNode = this._scribe.node.firstDeepestChild(this._scribe.el);
     if (firstNode.nodeName === '#text') {
-      firstNode.textContent = utils.leftTrim(firstNode.textContent);
-    }
-
-    // Remove all empty nodes at the front to get blocks working.
-    while(this._scribe.el.firstChild && this._scribe.el.firstChild.textContent === '') {
-      this._scribe.el.removeChild(this._scribe.el.firstChild);
+      firstNode.textContent = firstNode.textContent.trim();
     }
 
     // Firefox adds empty br tags at the end of content.
@@ -417,6 +420,24 @@ Object.assign(Block.prototype, SimpleBlock.fn, require('./block-validations'), {
     }
 
     return returnVal;
+  },
+
+  controls: {
+    'alignleft': function(ev) {
+      this.editor.dataset.stAlign = "left";
+      this.editor.style["text-align"] = 'left';
+      this.blockStorage.align = "left";
+    },
+    'aligncenter': function(ev) {
+      this.editor.dataset.stAlign = "center";
+      this.editor.style["text-align"] = 'center';
+      this.blockStorage.align = "center";
+    },
+    'alignright': function(ev) {
+      this.editor.dataset.stAlign = "right";
+      this.editor.style["text-align"] = 'right';
+      this.blockStorage.align = "right";
+    }
   },
 
   isEmpty: function() {

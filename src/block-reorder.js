@@ -5,8 +5,6 @@ var dropEvents = require('./helpers/drop-events');
 var EventBus = require('./event-bus');
 var Dom = require('./packages/dom');
 
-var config = require('./config');
-
 var BlockReorder = function(block_element, mediator) {
   this.block = block_element;
   this.blockID = this.block.getAttribute('id');
@@ -27,9 +25,7 @@ Object.assign(BlockReorder.prototype, require('./function-bind'), require('./ren
 
   attributes: function() {
     return {
-      'html': `<svg role="img" class="st-icon">
-                 <use xlink:href="${config.defaults.iconUrl}#move"/>
-               </svg>`,
+      'html': 'reorder',
       'draggable': 'true',
       'data-icon': 'move'
     };
@@ -55,9 +51,9 @@ Object.assign(BlockReorder.prototype, require('./function-bind'), require('./ren
   onDrop: function(ev) {
     ev.preventDefault();
 
-    var dropped_on = this.block,
-    item_id = ev.dataTransfer.getData("text/plain"),
-      block = document.querySelector('#' + item_id);
+    var dropped_on = this.block;
+    var item_id = ev.dataTransfer.getData("text/plain")
+    var block = document.querySelector('#' + item_id);
 
     if (!!item_id, !!block, dropped_on.id !== item_id) {
       Dom.insertAfter(block, dropped_on);
@@ -77,7 +73,7 @@ Object.assign(BlockReorder.prototype, require('./function-bind'), require('./ren
     block.parentNode.appendChild(this.dragEl);
 
     ev.dataTransfer.setDragImage(this.dragEl, 0, 0);
-    ev.dataTransfer.setData("text/plain", this.blockId());
+    ev.dataTransfer.setData('Text', this.blockId());
     this.mediator.trigger("block-controls:hide");
 
     EventBus.trigger("block:reorder:dragstart");

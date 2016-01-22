@@ -30,8 +30,14 @@ var Locales = {
       text: {
         'title': "Text"
       },
+      textborder: {
+        'title': "Text Border"
+      },
       list: {
         'title': "List"
+      },
+      logo: {
+        'title': "Logo"
       },
       quote: {
         'title': "Quote",
@@ -55,7 +61,16 @@ var Locales = {
       },
       heading: {
         'title': "Heading"
-      }
+      },
+      unsubscribe: {
+        'title': "Unsubscribe"
+      },
+      poweredby: {
+        'title': "Powered By"
+      },
+      social: {
+        'title': "Social"
+      },
     }
   }
 };

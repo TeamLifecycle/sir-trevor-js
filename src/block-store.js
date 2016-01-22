@@ -65,7 +65,7 @@ module.exports = {
   loadData: function() {},
 
   beforeLoadingData: function() {
-    utils.log("loadData for " + this.blockID);
+    utils.log("loadData for " + this.blockID, this);
     EventBus.trigger("editor/block/loadData");
     this.loadData(this._getData());
   },

@@ -9,8 +9,9 @@ var BlockReorder = require('./block-reorder');
 
 const BLOCK_TEMPLATE = require('./templates/block');
 
-var SimpleBlock = function(data, instance_id, mediator, options) {
+var SimpleBlock = function(data, instance_id, mediator, options, align) {
   this.createStore(data);
+  this.align = align;
   this.blockID = _.uniqueId('st-block-');
   this.instanceID = instance_id;
   this.mediator = mediator;

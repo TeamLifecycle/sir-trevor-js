@@ -10,9 +10,7 @@
 @import 'errors';
 
 // Block Controls
-@import 'block-addition';
-@import 'block-controls';
-@import 'block-replacer';
+@import 'block-control';
 
 // Blocks
 @import 'block';
@@ -21,3 +19,5 @@
 
 // Format Bar
 @import 'format-bar';
+
+@import 'custom'

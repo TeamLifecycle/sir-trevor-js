@@ -6,6 +6,7 @@ module.exports = {
   Droppable: require('./droppable.js'),
   Fetchable: require('./fetchable.js'),
   Pastable: require('./pastable.js'),
+  Socialable: require('./socialable.js'),
   Uploadable: require('./uploadable.js'),
   MultiEditable: require('./multi-editable.js'),
   Textable: require('./textable.js')

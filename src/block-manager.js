@@ -44,21 +44,20 @@ Object.assign(BlockManager.prototype, require('./function-bind'), require('./med
     'create': 'createBlock',
     'remove': 'removeBlock',
     'rerender': 'rerenderBlock',
-    'replace': 'replaceBlock',
     'focusPrevious': 'focusPreviousBlock',
     'focusNext': 'focusNextBlock'
   },
 
   initialize: function() {},
 
-  createBlock: function(type, data, previousSibling) {
+  createBlock: function(type, data, align, previousSibling) {
     type = utils.classify(type);
 
     // Run validations
     if (!this.canCreateBlock(type)) { return; }
-
+    console.trace()
     var block = new Blocks[type](data, this.instance_scope, this.mediator,
-                                 this.blockOptions);
+                                 this.blockOptions, align);
     this.blocks.push(block);
 
     this._incrementBlockTypeCount(type);
@@ -68,46 +67,24 @@ Object.assign(BlockManager.prototype, require('./function-bind'), require('./med
     this.mediator.trigger('block:limitReached', this.blockLimitReached());
 
     EventBus.trigger(data ? "block:create:existing" : "block:create:new", block);
-    utils.log("Block created of type " + type);
+    block.editor.style["text-align"] = align;
   },
 
   removeBlock: function(blockID, options) {
-    options = Object.assign({
-      transposeContent: false,
-      focusOnPrevious: false
-    }, options);
+    options = options || {};
 
     var block = this.findBlockById(blockID);
     var type = utils.classify(block.type);
-    var previousBlock = this.getPreviousBlock(block);
-    var nextBlock = this.getNextBlock(block);
     
     if (options.transposeContent && block.textable) {
 
-      // Don't allow removal of first block if it's the only block.
-      if (!previousBlock && this.blocks.length === 1) { return; }
+      var previousBlock = this.getPreviousBlock(block);
 
-      // If previous block can transpose content then append content.
       if (previousBlock && previousBlock.textable) {
         previousBlock.appendContent(
           block.getScribeInnerContent(), {
           keepCaretPosition: true
         });
-      } else {
-        // If there's content and the block above isn't textable then 
-        // cancel remove.
-        if (block.getScribeInnerContent() !== '') {
-          return;
-        }
-
-        // If block before isn't textable then we want to still focus.
-        if (previousBlock) {
-          previousBlock.focusAtEnd();
-        } else if (nextBlock) {
-          // If there wasn't a previous block then 
-          // we'll want to focus on the next block.
-          nextBlock.focus();
-        }
       }
     }
     
@@ -118,10 +95,6 @@ Object.assign(BlockManager.prototype, require('./function-bind'), require('./med
 
     block.remove();
 
-    if (options.focusOnPrevious && previousBlock) {
-      previousBlock.focusAtEnd();
-    }
-
     this._decrementBlockTypeCount(type);
     this.triggerBlockCountUpdate();
     this.mediator.trigger('block:limitReached', this.blockLimitReached());
@@ -129,16 +102,8 @@ Object.assign(BlockManager.prototype, require('./function-bind'), require('./med
     EventBus.trigger("block:remove");
   },
 
-  replaceBlock: function(blockNode, type, data) {
-    var block = this.findBlockById(blockNode.id);
-    this.createBlock(type, data || null, blockNode);
-    this.removeBlock(blockNode.id);
-    block.remove();
-  },
-
   renderBlock: function(block, previousSibling) {
-    // REFACTOR: this will have to do until we're able to address 
-    // the block manager
+    // REFACTOR: this will have to do until we're able to address the block manager
     if (previousSibling) {
       Dom.insertAfter(block.render().el, previousSibling);
     } else {
@@ -157,7 +122,6 @@ Object.assign(BlockManager.prototype, require('./function-bind'), require('./med
 
   getPreviousBlock: function(block) {
     var blockPosition = this.getBlockPosition(block.el);
-    if (blockPosition < 1) { return; }
     var previousBlock = this.wrapper.querySelectorAll('.st-block')[blockPosition - 1];
     return this.findBlockById(
       previousBlock.getAttribute('id')
@@ -166,7 +130,6 @@ Object.assign(BlockManager.prototype, require('./function-bind'), require('./med
 
   getNextBlock: function(block) {
     var blockPosition = this.getBlockPosition(block.el);
-    if (blockPosition < 0 || blockPosition >= this.blocks.length - 1) { return; }
     return this.findBlockById(
       this.wrapper.querySelectorAll('.st-block')[blockPosition + 1].getAttribute('id')
     );

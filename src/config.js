@@ -2,7 +2,7 @@
 
 var drop_options = {
   html: ['<div class="st-block__dropzone">',
-    '<svg role="img" class="st-icon"><use xlink:href="<%= config.defaults.iconUrl %>#<%= _.result(block, "icon_name") %>"/></svg>',
+    '<span class="st-icon"><%= _.result(block, "icon_name") %></span>',
     '<p><%= i18n.t("general:drop", { block: "<span>" + _.result(block, "title") + "</span>" }) %>',
     '</p></div>'].join('\n'),
     re_render_on_reorder: false
@@ -11,6 +11,41 @@ var drop_options = {
 var paste_options = {
   html: ['<input type="text" placeholder="<%= i18n.t("general:paste") %>"',
     ' class="st-block__paste-input st-paste-block">'].join('')
+};
+
+var social_options = {
+  html: [
+ '<div class="display hand text-center">',
+    '<div class="valid-list">',
+      '<img src="https://s3-us-west-2.amazonaws.com/lifecycle-cdn/email/social/facebook.png" alt="facebook" title="facebook">',
+      '<img src="https://s3-us-west-2.amazonaws.com/lifecycle-cdn/email/social/twitter.png" alt="facebook" title="facebook">',
+      '<img src="https://s3-us-west-2.amazonaws.com/lifecycle-cdn/email/social/instagram.png" alt="facebook" title="facebook">',
+      '<img src="https://s3-us-west-2.amazonaws.com/lifecycle-cdn/email/social/googleplus.png" alt="facebook" title="facebook">',
+    '</div>',
+    '<div class="overlay"><div class="plus">Edit Social Links</div></div>',
+    // '<button class="social-edit">Edit</button>',
+  '</div>',
+  '<div class="edit text-center hide">',
+    '<div class="form-row">',
+    '<img src="https://s3-us-west-2.amazonaws.com/lifecycle-cdn/email/social/facebook.png" class="social-icon">',
+    '<input type="text" class="social-input" data-social-type="facebook" placeholder="www.facebook.com/mypage">',
+    '</div>',
+    '<div class="form-row">',
+    '<img src="https://s3-us-west-2.amazonaws.com/lifecycle-cdn/email/social/twitter.png" class="social-icon">',
+    '<input type="text" class="social-input" data-social-type="twitter" placeholder="www.twitter.com/mypage">',
+    '</div>',
+    '<div class="form-row">',
+    '<img src="https://s3-us-west-2.amazonaws.com/lifecycle-cdn/email/social/instagram.png" class="social-icon">',
+    '<input type="text" class="social-input" data-social-type="instagram" placeholder="www.instagram.com/mypage">',
+    '</div>',
+    '<div class="form-row">',
+    '<img src="https://s3-us-west-2.amazonaws.com/lifecycle-cdn/email/social/googleplus.png" class="social-icon">',
+    '<input type="text" class="social-input" data-social-type="googleplus" placeholder="www.plus.google.com/mypage">',
+    '</div>',
+    '<button class="social-submit st-upload-btn">Save</button>',
+  '</div>'
+
+    ].join('')
 };
 
 var upload_options = {
@@ -49,6 +84,7 @@ module.exports = {
     Block: {
       drop_options: drop_options,
       paste_options: paste_options,
+      social_options: social_options,
       upload_options: upload_options,
     },
     blockLimit: 0,
@@ -56,7 +92,6 @@ module.exports = {
     required: [],
     uploadUrl: '/attachments',
     baseImageUrl: '/sir-trevor-uploads/',
-    iconUrl: '../src/icons/sir-trevor-icons.svg',
     errorsContainer: undefined,
     convertFromMarkdown: true,
     formatBar: {
@@ -64,7 +99,6 @@ module.exports = {
         {
           name: "Bold",
           title: "bold",
-          iconName: "fmt-bold",
           cmd: "bold",
           keyCode: 66,
           text : "B"
@@ -72,7 +106,6 @@ module.exports = {
         {
           name: "Italic",
           title: "italic",
-          iconName: "fmt-italic",
           cmd: "italic",
           keyCode: 73,
           text : "i"
@@ -80,31 +113,17 @@ module.exports = {
         {
           name: "Link",
           title: "link",
-          iconName: "fmt-link",
+          iconName: "link",
           cmd: "linkPrompt",
           text : "link",
         },
         {
           name: "Unlink",
           title: "unlink",
-          iconName: "fmt-unlink",
+          iconName: "link",
           cmd: "unlink",
           text : "link",
         },
-        {
-          name: "Heading",
-          title: "heading",
-          iconName: "fmt-heading",
-          cmd: "heading",
-          text: "heading"
-        },
-        {
-          name: "Quote",
-          title: "quote",
-          iconName: "fmt-quote",
-          cmd: "quote",
-          text: "quote"
-        }
       ],
     },
     ajaxOptions: {

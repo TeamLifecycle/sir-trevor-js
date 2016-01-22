@@ -3,11 +3,10 @@
 var Dom = require('../packages/dom');
 var Block = require('../block');
 
-
 module.exports = Block.extend({
 
-  type: "image",
-  title: function() { return i18n.t('blocks:image:title'); },
+  type: "logo",
+  title: function() { return i18n.t('blocks:logo:title'); },
 
   droppable: true,
   uploadable: true,
