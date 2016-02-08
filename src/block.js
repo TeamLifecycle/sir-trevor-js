@@ -371,6 +371,7 @@ Object.assign(Block.prototype, SimpleBlock.fn, require('./block-validations'), {
   },
 
   getSelectionForFormatter: function() {
+    console.log("getSelectionForFormatter");
     setTimeout(() => {
       var selection = window.getSelection(),
           selectionStr = selection.toString().trim(),

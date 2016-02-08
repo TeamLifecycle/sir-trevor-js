@@ -68,8 +68,11 @@ var ScribeTextBlockPlugin = function(block) {
     var isAtStart = false;
 
     scribe.el.addEventListener('keydown', function(ev) {
-
+      console.log("keydown");
       if (ev.keyCode === 13 && !ev.shiftKey) { // enter pressed
+        // tgtg put this here because pressing enter in a text area was creating a 
+        // new block for some reason, probably some side effects
+        return;
         ev.preventDefault();
 
         var data = {
