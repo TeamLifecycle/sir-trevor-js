@@ -26,6 +26,25 @@ module.exports = {
       { 'data-icon': cmd,
         'class': 'st-icon st-block-control-ui-btn st-block-control-ui-btn--' + cmd
       });
+
+      // tried implementing SVG unsuccessfully
+      // var child = document.createElement('use');
+      // // child["xmlns:xlink"] = "http://www.w3.org/1999/xlink";
+      // // child["xlink:href"] = config.defaults.iconUrl + "#left-align";
+      // child.setAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink");
+      // child.setAttribute("xlink:href", config.defaults.iconUrl + "#plus");
+
+      // var parent = document.createElement('svg');
+      // parent.setAttribute("role", "img");
+      // parent.className = "st-icon";
+      // parent.appendChild(child);
+
+      // var grandparent = document.createElement('a');
+      // grandparent["data-icon"] = cmd;
+      // grandparent.className = 'st-icon st-block-control-ui-btn st-block-control-ui-btn--' + cmd;
+      // grandparent.appendChild(parent);
+
+      // return grandparent;
   },
 
   addUiControl: function(cmd, handler) {
