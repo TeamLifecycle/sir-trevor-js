@@ -68,6 +68,8 @@ Object.assign(BlockManager.prototype, require('./function-bind'), require('./med
     this.mediator.trigger('block:limitReached', this.blockLimitReached());
 
     EventBus.trigger(data ? "block:create:existing" : "block:create:new", block);
+    console.log(type, data, previousSibling)
+    block.editor.style["text-align"] = data.align;
     utils.log("Block created of type " + type);
   },
 

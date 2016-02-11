@@ -37,19 +37,16 @@ module.exports = Block.extend({
 
   controls: {
     'alignleft': function(ev) {
-      this.editor.dataset.stAlign = "left";
       this.editor.style["text-align"] = 'left';
-      this.blockStorage.align = "left";
+      this.blockStorage.data.align = "left";
     },
     'aligncenter': function(ev) {
-      this.editor.dataset.stAlign = "center";
       this.editor.style["text-align"] = 'center';
-      this.blockStorage.align = "center";
+      this.blockStorage.data.align = "center";
     },
     'alignright': function(ev) {
-      this.editor.dataset.stAlign = "right";
       this.editor.style["text-align"] = 'right';
-      this.blockStorage.align = "right";
+      this.blockStorage.data.align = "right";
     }
   },
 
