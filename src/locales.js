@@ -55,7 +55,19 @@ var Locales = {
       },
       heading: {
         'title': "Heading"
-      }
+      },
+      unsubscribe: {
+        'title': "Unsubscribe"
+      },
+      logo: {
+        'title': "Logo"
+      },
+      poweredby: {
+        'title': "Powered By"
+      },
+      social: {
+        'title': "Social"
+      },
     }
   }
 };

@@ -1,41 +1,21 @@
 "use strict";
 
-/*
-  Text Block
-*/
-
+var _ = require('../lodash');
+var utils = require('../utils');
 var Block = require('../block');
-var stToHTML = require('../to-html');
-
-var ScribeTextBlockPlugin = require('./scribe-plugins/scribe-text-block-plugin');
-var ScribePastePlugin = require('./scribe-plugins/scribe-paste-plugin');
 
 module.exports = Block.extend({
- 
-  type: "unsubscribe",
 
+  type: 'unsubscribe',
   title: function() { return i18n.t('blocks:unsubscribe:title'); },
 
-  editorHTML: '<div class="st-unsubscribe-block" style="text-align: center;">Unsubscribe</div>',
+  // textable: true,
+  // toolbarEnabled: false,
+  // controllable: true,
 
-  icon_name: 'text',
+  icon_name: 'video',
 
-  textable: true,
-
-  controllable: true,
-
-  configureScribe: function(scribe) {
-    scribe.use(new ScribeTextBlockPlugin(this));
-    scribe.use(new ScribePastePlugin(this));
-  },
-
-  scribeOptions: { 
-    allowBlockElements: true,
-    tags: {
-      p: true,
-      span: true
-    }
-  },
+  editorHTML: '<div class="st-text-block" contenteditable="true">Unsubscribe</div>',
 
   loadData: function(data){
     if (this.options.convertFromMarkdown && data.format !== "html") {
@@ -43,5 +23,21 @@ module.exports = Block.extend({
     } else {
       this.setTextBlockHTML(data.text);
     }
+  },
+
+  
+  onBlockRender: function() {
+    this.focus();
+    this.toggleEmptyClass();
+  },
+
+  toggleEmptyClass: function() {
+    this.el.classList.toggle('st-block--empty', this.isEmpty());
+  },
+
+  isEmpty: function() {
+    return this._scribe.getTextContent() === '';
   }
+
 });
+
