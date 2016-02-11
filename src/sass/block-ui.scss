@@ -1,7 +1,16 @@
 .st-block__control-ui {
   position: absolute;
+  height: 50px;
   bottom: 0; left: 0;
   opacity: 0;
+  .st-icon {
+    &:nth-child(2) {
+      left: 50px;
+    }
+    &:nth-child(3) {
+      left: 100px;
+    }
+  }
 }
 
 .st-block__inner:hover .st-block__ui,

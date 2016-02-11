@@ -24,6 +24,7 @@ module.exports = Block.extend({
 
   textable: true,
   toolbarEnabled: false,
+  controllable: true,
 
   configureScribe: function(scribe) {
     scribe.use(new ScribeTextBlockPlugin(this));
@@ -32,6 +33,27 @@ module.exports = Block.extend({
     scribe.use(new ScribeQuotePlugin(this));
 
     scribe.on('content-changed', this.toggleEmptyClass.bind(this));
+  },
+
+  controls: {
+    'alignleft': function(ev) {
+      console.log("alignleft")
+      this.editor.dataset.stAlign = "left";
+      this.editor.style["text-align"] = 'left';
+      this.blockStorage.align = "left";
+    },
+    'aligncenter': function(ev) {
+      console.log("aligncenter")
+      this.editor.dataset.stAlign = "center";
+      this.editor.style["text-align"] = 'center';
+      this.blockStorage.align = "center";
+    },
+    'alignright': function(ev) {
+      console.log("alignright")
+      this.editor.dataset.stAlign = "right";
+      this.editor.style["text-align"] = 'right';
+      this.blockStorage.align = "right";
+    }
   },
 
   scribeOptions: { 
