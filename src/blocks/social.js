@@ -20,7 +20,7 @@ function imgCreate(title) {
 module.exports = Block.extend({
 
   type: "social",
-  // socialable: true,
+  socialable: true,
   title: function(){ return i18n.t('blocks:social:title'); },
 
 

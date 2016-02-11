@@ -66,6 +66,7 @@ Object.assign(Block.prototype, SimpleBlock.fn, require('./block-validations'), {
   drop_options: {},
   paste_options: {},
   upload_options: {},
+  social_options: {},
 
   formattable: true,
 

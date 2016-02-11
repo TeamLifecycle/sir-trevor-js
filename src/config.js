@@ -22,6 +22,41 @@ var upload_options = {
   ].join('\n')
 };
 
+var social_options = {
+  html: [
+ '<div class="display hand text-center">',
+    '<div class="valid-list">',
+      '<img src="https://s3-us-west-2.amazonaws.com/lifecycle-cdn/email/social/facebook.png" alt="facebook" title="facebook">',
+      '<img src="https://s3-us-west-2.amazonaws.com/lifecycle-cdn/email/social/twitter.png" alt="facebook" title="facebook">',
+      '<img src="https://s3-us-west-2.amazonaws.com/lifecycle-cdn/email/social/instagram.png" alt="facebook" title="facebook">',
+      '<img src="https://s3-us-west-2.amazonaws.com/lifecycle-cdn/email/social/googleplus.png" alt="facebook" title="facebook">',
+    '</div>',
+    '<div class="overlay"><div class="plus">Edit Social Links</div></div>',
+    // '<button class="social-edit">Edit</button>',
+  '</div>',
+  '<div class="edit text-center hide">',
+    '<div class="form-row">',
+    '<img src="https://s3-us-west-2.amazonaws.com/lifecycle-cdn/email/social/facebook.png" class="social-icon">',
+    '<input type="text" class="social-input" data-social-type="facebook" placeholder="www.facebook.com/mypage">',
+    '</div>',
+    '<div class="form-row">',
+    '<img src="https://s3-us-west-2.amazonaws.com/lifecycle-cdn/email/social/twitter.png" class="social-icon">',
+    '<input type="text" class="social-input" data-social-type="twitter" placeholder="www.twitter.com/mypage">',
+    '</div>',
+    '<div class="form-row">',
+    '<img src="https://s3-us-west-2.amazonaws.com/lifecycle-cdn/email/social/instagram.png" class="social-icon">',
+    '<input type="text" class="social-input" data-social-type="instagram" placeholder="www.instagram.com/mypage">',
+    '</div>',
+    '<div class="form-row">',
+    '<img src="https://s3-us-west-2.amazonaws.com/lifecycle-cdn/email/social/googleplus.png" class="social-icon">',
+    '<input type="text" class="social-input" data-social-type="googleplus" placeholder="www.plus.google.com/mypage">',
+    '</div>',
+    '<button class="social-submit st-upload-btn">Save</button>',
+  '</div>'
+
+    ].join('')
+};
+
 module.exports = {
   debug: false,
   scribeDebug: false,
@@ -49,6 +84,7 @@ module.exports = {
     Block: {
       drop_options: drop_options,
       paste_options: paste_options,
+      social_options: social_options,
       upload_options: upload_options,
     },
     blockLimit: 0,

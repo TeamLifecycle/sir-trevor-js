@@ -18,6 +18,7 @@ module.exports = {
   requireInputs: true,
 
   initializeDroppable: function() {
+console.log("initializeDroppable")
     utils.log("Adding droppable to block " + this.blockID);
 
     this.drop_options = Object.assign({}, config.defaults.Block.drop_options, this.drop_options);
