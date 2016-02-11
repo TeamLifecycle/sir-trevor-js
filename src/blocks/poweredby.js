@@ -1,41 +1,19 @@
 "use strict";
 
-/*
-  Text Block
-*/
-
+var _ = require('../lodash');
+var utils = require('../utils');
 var Block = require('../block');
-var stToHTML = require('../to-html');
-
-var ScribeTextBlockPlugin = require('./scribe-plugins/scribe-text-block-plugin');
-var ScribePastePlugin = require('./scribe-plugins/scribe-paste-plugin');
 
 module.exports = Block.extend({
- 
-  type: "poweredby",
 
+  type: 'poweredby',
   title: function() { return i18n.t('blocks:poweredby:title'); },
-
-  editorHTML: '<div class="st-poweredby-block" style="text-align: center;">Powered By Lifecycle</div>',
-
-  icon_name: 'text',
-
-  textable: true,
 
   controllable: true,
 
-  configureScribe: function(scribe) {
-    scribe.use(new ScribeTextBlockPlugin(this));
-    scribe.use(new ScribePastePlugin(this));
-  },
+  icon_name: 'video',
 
-  scribeOptions: { 
-    allowBlockElements: true,
-    tags: {
-      p: true,
-      span: true
-    }
-  },
+  editorHTML: '<div class="st-unsubscribe-block" style="text-align:center;">Powered by <img src="https://s3-us-west-2.amazonaws.com/lifecycle-cdn/email/logo-poweredby.png" alt="Powered By Lifecycle" style="height: 24px;vertical-align: middle;" /></div>',
 
   loadData: function(data){
     if (this.options.convertFromMarkdown && data.format !== "html") {
@@ -43,5 +21,29 @@ module.exports = Block.extend({
     } else {
       this.setTextBlockHTML(data.text);
     }
-  }
+  },
+
+  scribeOptions: { 
+    allowBlockElements: true,
+    tags: {
+      p: true
+    }
+  },
+
+  controls: {
+    'alignleft': function(ev) {
+      this.editor.style["text-align"] = 'left';
+      this.blockStorage.data.align = "left";
+    },
+    'aligncenter': function(ev) {
+      this.editor.style["text-align"] = 'center';
+      this.blockStorage.data.align = "center";
+    },
+    'alignright': function(ev) {
+      this.editor.style["text-align"] = 'right';
+      this.blockStorage.data.align = "right";
+    }
+  },
+
 });
+

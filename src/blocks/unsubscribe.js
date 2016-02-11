@@ -11,11 +11,11 @@ module.exports = Block.extend({
 
   // textable: true,
   // toolbarEnabled: false,
-  // controllable: true,
+  controllable: true,
 
   icon_name: 'video',
 
-  editorHTML: '<div class="st-text-block" contenteditable="true">Unsubscribe</div>',
+  editorHTML: '<div class="st-unsubscribe-block" style="text-align:center;">Unsubscribe</div>',
 
   loadData: function(data){
     if (this.options.convertFromMarkdown && data.format !== "html") {
@@ -25,19 +25,27 @@ module.exports = Block.extend({
     }
   },
 
-  
-  onBlockRender: function() {
-    this.focus();
-    this.toggleEmptyClass();
+  scribeOptions: { 
+    allowBlockElements: true,
+    tags: {
+      p: true
+    }
   },
 
-  toggleEmptyClass: function() {
-    this.el.classList.toggle('st-block--empty', this.isEmpty());
+  controls: {
+    'alignleft': function(ev) {
+      this.editor.style["text-align"] = 'left';
+      this.blockStorage.data.align = "left";
+    },
+    'aligncenter': function(ev) {
+      this.editor.style["text-align"] = 'center';
+      this.blockStorage.data.align = "center";
+    },
+    'alignright': function(ev) {
+      this.editor.style["text-align"] = 'right';
+      this.blockStorage.data.align = "right";
+    }
   },
-
-  isEmpty: function() {
-    return this._scribe.getTextContent() === '';
-  }
 
 });
 

@@ -44,6 +44,9 @@ var Locales = {
       video: {
         'title': "Video"
       },
+      Poweredby: {
+        'title': "Powerered By"
+      },
       tweet: {
         'title': "Tweet",
         'fetch_error': "There was a problem fetching your tweet"

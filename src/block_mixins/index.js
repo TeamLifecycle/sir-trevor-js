@@ -8,5 +8,6 @@ module.exports = {
   Pastable: require('./pastable.js'),
   Uploadable: require('./uploadable.js'),
   MultiEditable: require('./multi-editable.js'),
-  Textable: require('./textable.js')
+  Textable: require('./textable.js'),
+  Socialable: require('./socialable.js')
 };

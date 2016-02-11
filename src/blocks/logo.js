@@ -10,14 +10,13 @@ module.exports = Block.extend({
 
   droppable: true,
   uploadable: true,
-  controllable: true,
 
   icon_name: 'image',
 
   loadData: function(data){
     // Create our image tag
     this.editor.innerHTML = '';
-    this.editor.appendChild(Dom.createElement('img', { src: data.file.url }));
+    this.editor.appendChild(Dom.createElement('img', { src: data.file.url, height: 200 }));
   },
 
   onBlockRender: function(){
