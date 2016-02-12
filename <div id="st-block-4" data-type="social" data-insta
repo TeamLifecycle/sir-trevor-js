@@ -1,0 +1,42 @@
+<div id="st-block-4" data-type="social" data-instance="st-editor-1" class="st-block st-item-ready">
+    <div class="st-block__inner">
+        <div class="st-block__messages"></div>
+        <div class="st-block__editor"></div>
+        <div class="st-block__inputs">
+            <div class="display hand text-center">
+                <div class="valid-list"><img src="https://s3-us-west-2.amazonaws.com/lifecycle-cdn/email/social/facebook.png" alt="facebook" title="facebook"><img src="https://s3-us-west-2.amazonaws.com/lifecycle-cdn/email/social/twitter.png" alt="facebook" title="facebook"><img src="https://s3-us-west-2.amazonaws.com/lifecycle-cdn/email/social/instagram.png" alt="facebook" title="facebook"><img src="https://s3-us-west-2.amazonaws.com/lifecycle-cdn/email/social/googleplus.png" alt="facebook" title="facebook"></div>
+                <div class="overlay">
+                    <div class="plus">Edit Social Links</div>
+                </div>
+            </div>
+            <div class="edit text-center hide">
+                <div class="form-row"><img src="https://s3-us-west-2.amazonaws.com/lifecycle-cdn/email/social/facebook.png" class="social-icon"><input type="text" class="social-input" data-social-type="facebook" placeholder="www.facebook.com/mypage"></div>
+                <div class="form-row"><img src="https://s3-us-west-2.amazonaws.com/lifecycle-cdn/email/social/twitter.png" class="social-icon"><input type="text" class="social-input" data-social-type="twitter" placeholder="www.twitter.com/mypage"></div>
+                <div class="form-row"><img src="https://s3-us-west-2.amazonaws.com/lifecycle-cdn/email/social/instagram.png" class="social-icon"><input type="text" class="social-input" data-social-type="instagram" placeholder="www.instagram.com/mypage"></div>
+                <div class="form-row"><img src="https://s3-us-west-2.amazonaws.com/lifecycle-cdn/email/social/googleplus.png" class="social-icon"><input type="text" class="social-input" data-social-type="googleplus" placeholder="www.plus.google.com/mypage"></div><button class="social-submit st-upload-btn">Save</button></div>
+        </div>
+    </div>
+
+    <button class="st-block-addition" type="button">
+    <span class="st-block-addition__button">add</span>
+  </button>
+
+    <div class="st-block__ui">
+        <div class="st-block__ui-delete-controls">
+            <label class="st-block__delete-label">
+      Delete?
+    </label>
+            <button class="st-block-ui__confirm js-st-block-confirm-delete" type="button">
+      Yes
+    </button>
+            <button class="st-block-ui__confirm js-st-block-deny-delete" type="button">
+      No
+    </button>
+        </div>
+        <div class="st-block-positioner">
+            <div class="st-block-positioner__inner">
+                <span class="st-block-positioner__selected-value"></span>
+                <select class="st-block-positioner__select"><option value="0">Position</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
+            </div>
+        </div><a draggable="true" data-icon="move" class="st-block-ui-btn__reorder">reorder</a><a data-icon="close" class="st-block-ui-btn__delete">delete</a></div>
+</div>

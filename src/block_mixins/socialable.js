@@ -23,6 +23,7 @@ module.exports = {
         event.preventDefault()
         el.classList.add("hide")
         el.nextSibling.classList.remove("hide")
+        context.emitSocialLinksEditorOpenedEvent();
       });
     });
 
@@ -31,9 +32,29 @@ module.exports = {
         event.preventDefault()
         SirTrevor.onFormSubmit()
         context._handleContentSubmit(context.blockStorage.data);
+        console.log("context.blockStorage.data", context.blockStorage.data)
         EventBus.trigger('block:changed');
+        context.emitSocialLinksEditorSavedEvent(context.blockStorage.data);
       });
     });
+  },
+
+  _handleContentSubmit: function(ev) {
+    setTimeout(this.onContentSubmit.bind(this, ev, ev.currentTarget), 0);
+  },
+
+  emitSocialLinksEditorOpenedEvent: function() {
+    var event = new CustomEvent("social-links-editor-opened", {});
+    document.dispatchEvent(event);
+  },
+
+  emitSocialLinksEditorSavedEvent: function(data) {
+    var event = new CustomEvent("social-links-editor-saved", {detail: data});
+    document.dispatchEvent(event);
+    // can listen on client via
+    // document.addEventListener("social-links-editor-saved", function(e) {
+    //   console.log(e.detail);
+    // });
   }
 
 };
