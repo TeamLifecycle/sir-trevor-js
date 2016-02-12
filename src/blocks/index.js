@@ -8,4 +8,8 @@ module.exports = {
   List: require('./list'),
   Tweet: require('./tweet'),
   Video: require('./video'),
+  Logo: require('./logo'),
+  Unsubscribe: require('./unsubscribe'),
+  Poweredby: require('./poweredby'),
+  Social: require('./social'),
 };
