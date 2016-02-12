@@ -37,17 +37,19 @@ module.exports = Block.extend({
 
   controls: {
     'alignleft': function(ev) {
-      this.editor.style["text-align"] = 'left';
-      this.blockStorage.data.align = "left";
+      this.setAlignment("left");
     },
     'aligncenter': function(ev) {
-      this.editor.style["text-align"] = 'center';
-      this.blockStorage.data.align = "center";
+      this.setAlignment("center");
     },
     'alignright': function(ev) {
-      this.editor.style["text-align"] = 'right';
-      this.blockStorage.data.align = "right";
+      this.setAlignment("right");
     }
+  },
+
+  setAlignment: function(dir) {
+    this.editor.style["text-align"] = dir;
+    this.setData({"align": dir});
   },
 
   scribeOptions: { 
@@ -66,6 +68,9 @@ module.exports = Block.extend({
   },
 
   onBlockRender: function() {
+    if(this.blockStorage.data.align) {
+      this.editor.style["text-align"] = this.blockStorage.data.align;
+    }
     this.focus();
     this.toggleEmptyClass();
   },
