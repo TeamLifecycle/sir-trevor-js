@@ -26,6 +26,7 @@
   </style>
 </head>
 <body>
+  <span style="background: aliceblue;" contenteditable="false" draggable="true" id='drag' data-lc-property="user.first_name">drag me</span>
   <form action="" class="form">
     <div class="errors"></div>
     <textarea class="sir-trevor" name="content">{"data":[{"type":"text","data":{"text":"<p>From the high-level tasks of prioritizing a product roadmap to the day-to-day of writing requirements, knowing how a customer will use your product and what he/she hopes to gain from it is the key to success. While there are many tasks a PM is responsible for, your biggest contribution to the company is a deep understanding of the customer — which you must use to guide a development team.</p>","format":"html","align":"right"}}]}</textarea>
@@ -66,6 +67,10 @@
         e.preventDefault();
         document.querySelector('#st-json-debug').innerText = window.editor.store.toString(true);
       });
+
+      document.querySelector('span').addEventListener('dragstart', function(e) {
+        e.dataTransfer.setData("text/plain", "{{" + this.dataset.lcProperty + "}}");
+      }, false);
 
     })();
   </script>
