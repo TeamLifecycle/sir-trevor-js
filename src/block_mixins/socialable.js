@@ -33,7 +33,7 @@ module.exports = {
         SirTrevor.onFormSubmit()
         context._handleContentSubmit(context.blockStorage.data);
         console.log("context.blockStorage.data", context.blockStorage.data)
-        EventBus.trigger('block:changed');
+        EventBus.trigger('block:reorder');
         context.emitSocialLinksEditorSavedEvent(context.blockStorage.data);
       });
     });

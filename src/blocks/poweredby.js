@@ -3,6 +3,7 @@
 var _ = require('../lodash');
 var utils = require('../utils');
 var Block = require('../block');
+var stToHTML = require('../to-html');
 
 module.exports = Block.extend({
 
