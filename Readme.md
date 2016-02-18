@@ -103,7 +103,7 @@ matrix:
   - BROWSER_NAME='firefox' BROWSER_VERSION='40' PLATFORM='Windows 7'
   - BROWSER_NAME='safari' BROWSER_VERSION='8' PLATFORM='OSX 10.10'
 
-## Lifecycle deployment
+## Lifecycle deployment (or run `sh .scripts/deploy-to-webapp.sh` )
 grunt --force;
 cp -R build/* ../webapp/public/vendor/sir-trevor-js;
    
