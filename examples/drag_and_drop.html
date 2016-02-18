@@ -26,11 +26,13 @@
   </style>
 </head>
 <body>
-  <span style="background: aliceblue;" contenteditable="false" draggable="true" id='drag' data-lc-property="user.first_name">drag me</span>
+
+  <span style="background: aliceblue;" contenteditable="false" draggable="true" id='drag'>heres a tag</span>
+
   <form action="" class="form">
     <div class="errors"></div>
-    <textarea class="sir-trevor" name="content">{"data":[{"type":"text","data":{"text":"<p>From the high-level tasks of prioritizing a product roadmap to the day-to-day of writing requirements, knowing how a customer will use your product and what he/she hopes to gain from it is the key to success. While there are many tasks a PM is responsible for, your biggest contribution to the company is a deep understanding of the customer — which you must use to guide a development team.</p>","format":"html","align":"right"}}]}</textarea>
-    <input type="submit" value="Submit">
+    <textarea class="sir-trevor" name="content"></textarea>
+    <input type="submit" value="Submit" style="display: none;">
   </form>
 
   <pre id="st-json-debug"></pre>
@@ -43,6 +45,11 @@
   <script src="../locales/de.js" type="text/javascript" charset="utf-8"></script>
   <script type="text/javascript" charset="utf-8">
     (function(){
+
+      document.querySelector('span').addEventListener('dragstart', function(e) {
+        e.dataTransfer.setData("text/plain", "{{" + this.textContent + "}}");
+      }, false);
+
       SirTrevor.config.debug = true;
       SirTrevor.config.scribeDebug = true;
       SirTrevor.config.language = "en";
@@ -52,25 +59,21 @@
 
       window.editor = new SirTrevor.Editor({
         el: document.querySelector('.sir-trevor'),
-        // blockTypes: [
-        //   "Heading",
-        //   "Text",
-        //   "List",
-        //   "Quote",
-        //   "Image",
-        //   "Video",
-        //   "Tweet"
-        // ]
+        blockTypes: [
+          "Heading",
+          "Text",
+          "List",
+          "Quote",
+          "Image",
+          "Video"
+        ],
+        defaultType: "Text"
       });
 
       document.querySelector('form').addEventListener('submit', function (e) {
         e.preventDefault();
         document.querySelector('#st-json-debug').innerText = window.editor.store.toString(true);
       });
-
-      document.querySelector('span').addEventListener('dragstart', function(e) {
-        e.dataTransfer.setData("text/plain", "{{" + this.dataset.lcProperty + "}}");
-      }, false);
 
     })();
   </script>

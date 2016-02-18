@@ -44,6 +44,9 @@ var Locales = {
       video: {
         'title': "Video"
       },
+      Poweredby: {
+        'title': "Powerered By"
+      },
       tweet: {
         'title': "Tweet",
         'fetch_error': "There was a problem fetching your tweet"
@@ -55,7 +58,19 @@ var Locales = {
       },
       heading: {
         'title': "Heading"
-      }
+      },
+      unsubscribe: {
+        'title': "Unsubscribe"
+      },
+      logo: {
+        'title': "Logo"
+      },
+      poweredby: {
+        'title': "Powered By"
+      },
+      social: {
+        'title': "Social"
+      },
     }
   }
 };

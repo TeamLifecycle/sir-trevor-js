@@ -52,8 +52,9 @@ Object.assign(Block.prototype, SimpleBlock.fn, require('./block-validations'), {
   toolbarEnabled: true,
 
   availableMixins: ['droppable', 'pastable', 'uploadable', 'fetchable',
-    'ajaxable', 'controllable', 'multi_editable', 'textable'],
+    'ajaxable', 'controllable', 'multi_editable', 'textable', 'socialable'],
 
+  socialable: false,
   droppable: false,
   pastable: false,
   uploadable: false,
@@ -65,6 +66,7 @@ Object.assign(Block.prototype, SimpleBlock.fn, require('./block-validations'), {
   drop_options: {},
   paste_options: {},
   upload_options: {},
+  social_options: {},
 
   formattable: true,
 
