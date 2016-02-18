@@ -623,6 +623,7 @@ ul.st-text-block {
   color: #9B9B9B; }
 
 .st-block-ui-btn__reorder {
+  display: none;
   right: 2em;
   -webkit-transform: scaleX(-1);
           transform: scaleX(-1);
@@ -633,6 +634,9 @@ ul.st-text-block {
   .st-block-ui-btn__reorder:hover, .st-block-ui-btn__reorder:focus {
     color: #17BB75;
     opacity: 1; }
+
+.st-block:hover .st-block-ui-btn__reorder, .st-block:hover .st-block-ui-btn__delete {
+  display: block; }
 
 .st-block-ui-btn__delete {
   right: 1em;
