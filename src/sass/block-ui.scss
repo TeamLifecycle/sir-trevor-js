@@ -14,6 +14,8 @@
 }
 
 .st-block__inner:hover .st-block__ui,
+.st-block__inner:hover .st-block-ui-btn__delete,
+.st-block__inner:hover .st-block-ui-btn__reorder,
 .st-block__inner:hover .st-block__control-ui {
   opacity: 1;
 }
@@ -41,7 +43,7 @@
 
 .st-block-ui-btn__reorder {
   @extend %st-block-ui-btn;
-  display: none; // hide until hovered
+  opacity: 0; // hide until hovered
   right: 2em;
   transform: scaleX(-1);
   top: 0.5em;
@@ -61,7 +63,7 @@
 
 .st-block-ui-btn__delete {
   @extend %st-block-ui-btn;
-  display: none; // hide until hovered
+  opacity: 0; // hide until hovered
   right: 1em;
   top: 1.5em;
   font-size:1.5em;

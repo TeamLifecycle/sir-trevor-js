@@ -601,6 +601,8 @@ ul.st-text-block {
     left: 4em; }
 
 .st-block__inner:hover .st-block__ui,
+.st-block__inner:hover .st-block-ui-btn__delete,
+.st-block__inner:hover .st-block-ui-btn__reorder,
 .st-block__inner:hover .st-block__control-ui {
   opacity: 1; }
 
@@ -623,7 +625,7 @@ ul.st-text-block {
   color: #9B9B9B; }
 
 .st-block-ui-btn__reorder {
-  display: none;
+  opacity: 0;
   right: 2em;
   -webkit-transform: scaleX(-1);
           transform: scaleX(-1);
@@ -639,6 +641,7 @@ ul.st-text-block {
   display: block; }
 
 .st-block-ui-btn__delete {
+  opacity: 0;
   right: 1em;
   top: 1.5em;
   font-size: 1.5em; }
