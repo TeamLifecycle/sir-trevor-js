@@ -20916,6 +20916,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  type: "social",
 	  socialable: true,
+	  controllable: true,
 	  title: function title() {
 	    return i18n.t('blocks:social:title');
 	  },
