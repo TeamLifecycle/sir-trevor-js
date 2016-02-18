@@ -41,6 +41,7 @@
 
 .st-block-ui-btn__reorder {
   @extend %st-block-ui-btn;
+  display: none;
   right: 2em;
   transform: scaleX(-1);
   top: 0.5em;
@@ -51,6 +52,11 @@
     color:$accent-color;
     opacity: 1;
   }
+}
+
+// hide reorder/delete unless hovered over block
+.st-block:hover .st-block-ui-btn__reorder, .st-block:hover .st-block-ui-btn__delete {
+  display: block;
 }
 
 .st-block-ui-btn__delete {

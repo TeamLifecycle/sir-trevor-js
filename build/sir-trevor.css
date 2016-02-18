@@ -591,7 +591,7 @@ ul.st-text-block {
 
 .st-block__control-ui {
   position: absolute;
-  height: 50px;
+  height: 10px;
   bottom: 0;
   left: 0;
   opacity: 0; }
@@ -648,10 +648,7 @@ ul.st-text-block {
   width: 2em;
   font-size: 1.5em;
   line-height: 1.25em;
-  height: 1.25em;
-  border: 2px solid #17BB75;
-  border-left: 0;
-  border-bottom: 0; }
+  height: 1.25em; }
 
 .st-block--with-errors .st-block-control-ui-btn,
 .st-block--delete-active .st-block-control-ui-btn {
@@ -835,11 +832,16 @@ div[data-type="social"] .edit .form-row {
   background: transparent; }
 
 [data-type="logo"] img, [data-type="image"] img {
-  height: 50px !important;
   width: inherit !important; }
 
 [data-type="logo"] .st-block__editor, [data-type="image"] .st-block__editor {
   padding: 20px 0; }
+
+[data-type="logo"] {
+  height: 70px !important; }
+
+[data-type="image"] {
+  max-height: 400px !important; }
 
 [data-type="unsubscribe"] .st-block__inner, [data-type="poweredby"] .st-block__inner {
   padding: 10px 0 30px; }

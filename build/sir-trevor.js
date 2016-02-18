@@ -6262,6 +6262,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var utils = __webpack_require__(29);
 	var Dom = __webpack_require__(69);
 	var Events = __webpack_require__(131);
+	var config = __webpack_require__(68);
 
 	module.exports = {
 
@@ -6278,28 +6279,29 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  getControlTemplate: function getControlTemplate(cmd) {
-	    return Dom.createElement("a", { 'data-icon': cmd,
-	      'class': 'st-icon st-block-control-ui-btn st-block-control-ui-btn--' + cmd
-	    });
+	    // return Dom.createElement("a",
+	    //   { 'data-icon': cmd,
+	    //     'class': 'st-icon st-block-control-ui-btn st-block-control-ui-btn--' + cmd
+	    //   });
 
-	    // tried implementing SVG unsuccessfully
-	    // var child = document.createElement('use');
-	    // // child["xmlns:xlink"] = "http://www.w3.org/1999/xlink";
-	    // // child["xlink:href"] = config.defaults.iconUrl + "#left-align";
-	    // child.setAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink");
-	    // child.setAttribute("xlink:href", config.defaults.iconUrl + "#plus");
+	    // TODO SVG's not rendering
+	    var child = document.createElement('use');
+	    // child["xmlns:xlink"] = "http://www.w3.org/1999/xlink";
+	    // child["xlink:href"] = config.defaults.iconUrl + "#left-align";
+	    child.setAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink");
+	    child.setAttribute("xlink:href", config.defaults.iconUrl + "#plus");
 
-	    // var parent = document.createElement('svg');
-	    // parent.setAttribute("role", "img");
-	    // parent.className = "st-icon";
-	    // parent.appendChild(child);
+	    var parent = document.createElement('svg');
+	    parent.setAttribute("role", "img");
+	    parent.className = "st-icon";
+	    parent.appendChild(child);
 
-	    // var grandparent = document.createElement('a');
-	    // grandparent["data-icon"] = cmd;
-	    // grandparent.className = 'st-icon st-block-control-ui-btn st-block-control-ui-btn--' + cmd;
-	    // grandparent.appendChild(parent);
+	    var grandparent = document.createElement('a');
+	    grandparent["data-icon"] = cmd;
+	    grandparent.className = 'st-icon st-block-control-ui-btn st-block-control-ui-btn--' + cmd;
+	    grandparent.appendChild(parent);
 
-	    // return grandparent;
+	    return grandparent;
 	  },
 
 	  addUiControl: function addUiControl(cmd, handler) {
@@ -18167,9 +18169,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.mediator.trigger('block:limitReached', this.blockLimitReached());
 
 	    EventBus.trigger(data ? "block:create:existing" : "block:create:new", block);
-	    if (data && data.align) {
-	      block.editor.style["text-align"] = data.align;
-	    }
 	    utils.log("Block created of type " + type);
 	  },
 
@@ -18491,17 +18490,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  controls: {
 	    'alignleft': function alignleft(ev) {
-	      this.editor.style["text-align"] = 'left';
-	      this.blockStorage.data.align = "left";
+	      this.setAlignment("left");
 	    },
 	    'aligncenter': function aligncenter(ev) {
-	      this.editor.style["text-align"] = 'center';
-	      this.blockStorage.data.align = "center";
+	      this.setAlignment("center");
 	    },
 	    'alignright': function alignright(ev) {
-	      this.editor.style["text-align"] = 'right';
-	      this.blockStorage.data.align = "right";
+	      this.setAlignment("right");
 	    }
+	  },
+
+	  setAlignment: function setAlignment(dir) {
+	    this.editor.style["text-align"] = dir;
+	    this.setData({ "align": dir });
 	  },
 
 	  scribeOptions: {
@@ -18520,6 +18521,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  onBlockRender: function onBlockRender() {
+	    if (this.blockStorage.data.align) {
+	      this.editor.style["text-align"] = this.blockStorage.data.align;
+	    }
 	    this.focus();
 	    this.toggleEmptyClass();
 	  },
