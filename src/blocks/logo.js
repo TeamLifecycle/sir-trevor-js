@@ -10,6 +10,7 @@ module.exports = Block.extend({
 
   droppable: true,
   uploadable: true,
+  controllable: true,
 
   icon_name: 'image',
 
@@ -29,6 +30,10 @@ module.exports = Block.extend({
         this.onDrop(ev.currentTarget);
       }).bind(this));
     }.bind(this));
+    // need this
+    if(this.blockStorage.data.align) {
+      this.editor.style["text-align"] = this.blockStorage.data.align;
+    }
   },
 
   onDrop: function(transferData){

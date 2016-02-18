@@ -34,7 +34,6 @@ module.exports = Block.extend({
     this.loadData(this._getData());
   },
 
-
   loadData: function(data) {
     this.$('.valid-list')[0].innerHTML = ""
     for (var key in data) {
@@ -46,8 +45,13 @@ module.exports = Block.extend({
     }
     this.$('.display')[0].classList.remove("hide")
     this.$('.edit')[0].classList.add("hide")
+  },
 
-
+  onBlockRender: function(){
+    // might need this
+    if(this.blockStorage.data.align) {
+      this.editor.style["text-align"] = this.blockStorage.data.align;
+    }
   },
 
   onContentSubmit: function(data){
