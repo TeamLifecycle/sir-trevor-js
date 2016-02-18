@@ -600,11 +600,11 @@ ul.st-text-block {
   .st-block__control-ui .st-icon:nth-child(3), .st-block__control-ui .st-block-ui-btn__reorder:nth-child(3), .st-block__control-ui .st-block-ui-btn__delete:nth-child(3), .st-block__control-ui .st-block-control-ui-btn:nth-child(3) {
     left: 4em; }
 
-.st-block__inner:hover .st-block__ui,
-.st-block__inner:hover .st-block-ui-btn__delete,
-.st-block__inner:hover .st-block-ui-btn__reorder,
-.st-block__inner:hover .st-block__control-ui {
+.st-block:hover .st-block__ui, .st-block:hover .st-block__control-ui {
   opacity: 1; }
+
+.st-block:hover .st-block-ui-btn__delete, .st-block:hover .st-block-ui-btn__reorder {
+  opacity: .2; }
 
 .st-block-ui__confirm {
   color: #d70014;
@@ -629,16 +629,10 @@ ul.st-text-block {
   right: 2em;
   -webkit-transform: scaleX(-1);
           transform: scaleX(-1);
-  top: 0.5em;
-  opacity: 0.2;
-  -webkit-transition: opacity 0.3s ease-in-out;
-          transition: opacity 0.3s ease-in-out; }
+  top: 0.5em; }
   .st-block-ui-btn__reorder:hover, .st-block-ui-btn__reorder:focus {
     color: #17BB75;
     opacity: 1; }
-
-.st-block:hover .st-block-ui-btn__reorder, .st-block:hover .st-block-ui-btn__delete {
-  display: block; }
 
 .st-block-ui-btn__delete {
   opacity: 0;

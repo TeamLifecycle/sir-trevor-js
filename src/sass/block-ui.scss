@@ -13,11 +13,17 @@
   }
 }
 
-.st-block__inner:hover .st-block__ui,
-.st-block__inner:hover .st-block-ui-btn__delete,
-.st-block__inner:hover .st-block-ui-btn__reorder,
-.st-block__inner:hover .st-block__control-ui {
-  opacity: 1;
+.st-block:hover {
+  .st-block__ui, .st-block__control-ui {
+    opacity: 1;
+  }
+  .st-block-ui-btn__delete, .st-block-ui-btn__reorder {
+    opacity: .2;
+  }
+}
+
+.st-blocks:hover .st-block-addition__button {
+  opacity: .2;
 }
 
 .st-block-ui__confirm {
@@ -47,8 +53,7 @@
   right: 2em;
   transform: scaleX(-1);
   top: 0.5em;
-  opacity: 0.2;
-  transition: opacity 0.3s ease-in-out;
+  // transition: opacity 0.3s ease-in-out;
   &:hover,
   &:focus {
     color:$accent-color;
@@ -56,10 +61,10 @@
   }
 }
 
-// hide reorder/delete unless hovered over block
-.st-block:hover .st-block-ui-btn__reorder, .st-block:hover .st-block-ui-btn__delete {
-  display: block;
-}
+// // hide reorder/delete unless hovered over block
+// .st-block:hover .st-block-ui-btn__reorder, .st-block:hover .st-block-ui-btn__delete {
+//   display: block;
+// }
 
 .st-block-ui-btn__delete {
   @extend %st-block-ui-btn;
@@ -67,6 +72,7 @@
   right: 1em;
   top: 1.5em;
   font-size:1.5em;
+  // transition: opacity 0.3s ease-in-out;
   &:hover,
   &:focus {
     color:$error-color;
