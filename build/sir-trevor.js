@@ -18457,6 +18457,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var Block = __webpack_require__(245);
 	var stToHTML = __webpack_require__(254);
+	var EventBus = __webpack_require__(75);
 
 	var ScribeTextBlockPlugin = __webpack_require__(255);
 	var ScribePastePlugin = __webpack_require__(259);
@@ -18503,6 +18504,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  setAlignment: function setAlignment(dir) {
 	    this.editor.style["text-align"] = dir;
 	    this.setData({ "align": dir });
+	    console.log("setAlignment");
+	    EventBus.trigger('block:reorder');
 	  },
 
 	  scribeOptions: {
@@ -20801,6 +20804,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var utils = __webpack_require__(29);
 	var Block = __webpack_require__(245);
 	var stToHTML = __webpack_require__(254);
+	var EventBus = __webpack_require__(75);
 
 	module.exports = Block.extend({
 
@@ -20834,17 +20838,21 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  controls: {
 	    'alignleft': function alignleft(ev) {
-	      this.editor.style["text-align"] = 'left';
-	      this.blockStorage.data.align = "left";
+	      this.setAlignment("left");
 	    },
 	    'aligncenter': function aligncenter(ev) {
-	      this.editor.style["text-align"] = 'center';
-	      this.blockStorage.data.align = "center";
+	      this.setAlignment("center");
 	    },
 	    'alignright': function alignright(ev) {
-	      this.editor.style["text-align"] = 'right';
-	      this.blockStorage.data.align = "right";
+	      this.setAlignment("right");
 	    }
+	  },
+
+	  setAlignment: function setAlignment(dir) {
+	    this.editor.style["text-align"] = dir;
+	    this.setData({ "align": dir });
+	    console.log("setAlignment");
+	    EventBus.trigger('block:reorder');
 	  }
 
 	});

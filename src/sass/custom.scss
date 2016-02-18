@@ -1,8 +1,8 @@
 // helpers
 
-div[data-type="textborder"] {
-	border-top: 5px solid #4FC3F7;
-}
+// div[data-type="textborder"] {
+// 	border-top: 5px solid #4FC3F7;
+// }
 
 .hide {
 	display: none;
@@ -122,5 +122,11 @@ div[data-type="social"] {
 [data-type="unsubscribe"], [data-type="poweredby"] {
 	.st-block__inner {
 		padding: 10px 0 30px;	
+	}
+}
+
+div[data-type="unsubscribe"], div[data-type="poweredby"] {
+	.st-block-ui-btn__delete {
+		opacity: 0!important;
 	}
 }

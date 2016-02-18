@@ -123,7 +123,7 @@ sir-trevor-icons.svg.st-icon, .st-block-ui-btn__reorder, .st-block-ui-btn__delet
   margin: 0 auto;
   width: 100%;
   cursor: pointer;
-  opacity: 0.2;
+  opacity: 0;
   cursor: pointer;
   -webkit-transform: translateZ(0);
           transform: translateZ(0); }
@@ -606,6 +606,9 @@ ul.st-text-block {
 .st-block:hover .st-block-ui-btn__delete, .st-block:hover .st-block-ui-btn__reorder {
   opacity: .2; }
 
+.st-blocks:hover .st-block-addition__button {
+  opacity: .2; }
+
 .st-block-ui__confirm {
   color: #d70014;
   border: 1px solid #d70014;
@@ -635,6 +638,7 @@ ul.st-text-block {
     opacity: 1; }
 
 .st-block-ui-btn__delete {
+  display: block !important;
   opacity: 0;
   right: 1em;
   top: 1.5em;
@@ -765,9 +769,6 @@ ul.st-text-block {
 .st-format-btn--Unlink {
   text-decoration: line-through; }
 
-div[data-type="textborder"] {
-  border-top: 5px solid #4FC3F7; }
-
 .hide {
   display: none; }
 
@@ -846,3 +847,6 @@ div[data-type="social"] .edit .form-row {
 
 [data-type="unsubscribe"] .st-block__inner, [data-type="poweredby"] .st-block__inner {
   padding: 10px 0 30px; }
+
+div[data-type="unsubscribe"] .st-block-ui-btn__delete, div[data-type="poweredby"] .st-block-ui-btn__delete {
+  opacity: 0 !important; }

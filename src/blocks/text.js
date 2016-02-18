@@ -6,6 +6,7 @@
 
 var Block = require('../block');
 var stToHTML = require('../to-html');
+var EventBus = require('../event-bus');
 
 var ScribeTextBlockPlugin = require('./scribe-plugins/scribe-text-block-plugin');
 var ScribePastePlugin = require('./scribe-plugins/scribe-paste-plugin');
@@ -50,6 +51,8 @@ module.exports = Block.extend({
   setAlignment: function(dir) {
     this.editor.style["text-align"] = dir;
     this.setData({"align": dir});
+    console.log("setAlignment")
+    EventBus.trigger('block:reorder');
   },
 
   scribeOptions: { 

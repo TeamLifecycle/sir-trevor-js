@@ -68,6 +68,7 @@
 
 .st-block-ui-btn__delete {
   @extend %st-block-ui-btn;
+  display: block!important; //show delete on text block
   opacity: 0; // hide until hovered
   right: 1em;
   top: 1.5em;

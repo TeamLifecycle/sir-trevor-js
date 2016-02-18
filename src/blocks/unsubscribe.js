@@ -4,6 +4,7 @@ var _ = require('../lodash');
 var utils = require('../utils');
 var Block = require('../block');
 var stToHTML = require('../to-html');
+var EventBus = require('../event-bus');
 
 module.exports = Block.extend({
 
@@ -19,11 +20,11 @@ module.exports = Block.extend({
   editorHTML: '<div class="st-unsubscribe-block" style="text-align:center;">Unsubscribe</div>',
 
   loadData: function(data){
-    if (this.options.convertFromMarkdown && data.format !== "html") {
-      this.setTextBlockHTML(stToHTML(data.text, this.type));
-    } else {
-      this.setTextBlockHTML(data.text);
-    }
+    // if (this.options.convertFromMarkdown && data.format !== "html") {
+    //   // this.setTextBlockHTML(stToHTML(data.text, this.type));
+    // } else {
+    //   // this.setTextBlockHTML(data.text);
+    // }
   },
 
   scribeOptions: { 
@@ -35,17 +36,21 @@ module.exports = Block.extend({
 
   controls: {
     'alignleft': function(ev) {
-      this.editor.style["text-align"] = 'left';
-      this.blockStorage.data.align = "left";
+      this.setAlignment("left");
     },
     'aligncenter': function(ev) {
-      this.editor.style["text-align"] = 'center';
-      this.blockStorage.data.align = "center";
+      this.setAlignment("center");
     },
     'alignright': function(ev) {
-      this.editor.style["text-align"] = 'right';
-      this.blockStorage.data.align = "right";
+      this.setAlignment("right");
     }
+  },
+
+  setAlignment: function(dir) {
+    this.editor.style["text-align"] = dir;
+    this.setData({"align": dir});
+    console.log("setAlignment")
+    EventBus.trigger('block:reorder');
   },
 
 });
