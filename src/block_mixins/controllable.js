@@ -4,6 +4,7 @@ var utils = require('../utils');
 var Dom = require('../packages/dom');
 var Events = require('../packages/events');
 var config = require('../config');
+var EventBus = require('../event-bus');
 
 module.exports = {
 
@@ -22,6 +23,25 @@ module.exports = {
     this.inner.appendChild(this.control_ui);
   },
 
+  controls: {
+    'alignleft': function(ev) {
+      this.setAlignment("left");
+    },
+    'aligncenter': function(ev) {
+      this.setAlignment("center");
+    },
+    'alignright': function(ev) {
+      this.setAlignment("right");
+    }
+  },
+
+  setAlignment: function(dir) {
+    this.editor.style["text-align"] = dir;
+    this.setData({"align": dir});
+    console.log("setAlignment")
+    EventBus.trigger('block:reorder');
+  },
+  
   getControlTemplate: function(cmd) {
     // return Dom.createElement("a",
     //   { 'data-icon': cmd,

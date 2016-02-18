@@ -20,11 +20,7 @@ module.exports = Block.extend({
   editorHTML: '<div class="st-unsubscribe-block" style="text-align:center;">Unsubscribe</div>',
 
   loadData: function(data){
-    // if (this.options.convertFromMarkdown && data.format !== "html") {
-    //   // this.setTextBlockHTML(stToHTML(data.text, this.type));
-    // } else {
-    //   // this.setTextBlockHTML(data.text);
-    // }
+    // no data to load
   },
 
   scribeOptions: { 
@@ -32,25 +28,6 @@ module.exports = Block.extend({
     tags: {
       p: true
     }
-  },
-
-  controls: {
-    'alignleft': function(ev) {
-      this.setAlignment("left");
-    },
-    'aligncenter': function(ev) {
-      this.setAlignment("center");
-    },
-    'alignright': function(ev) {
-      this.setAlignment("right");
-    }
-  },
-
-  setAlignment: function(dir) {
-    this.editor.style["text-align"] = dir;
-    this.setData({"align": dir});
-    console.log("setAlignment")
-    EventBus.trigger('block:reorder');
   },
 
 });

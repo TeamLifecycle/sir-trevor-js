@@ -313,8 +313,6 @@ sir-trevor-icons.svg.st-icon, .st-block-ui-btn__reorder, .st-block-ui-btn__delet
     margin-bottom: 0; }
 
 .st-block__inner--droppable {
-  border: 1px solid #ddd;
-  background: #F7F7F7;
   cursor: pointer;
   margin-top: 2em;
   margin-bottom: 2em; }
@@ -444,6 +442,12 @@ ul.st-text-block {
   display: block;
   text-align: center;
   margin: 0 auto 0.2em; }
+
+.st-block[data-type="image"] .st-block__dropzone .st-icon, .st-block[data-type="image"] .st-block__dropzone .st-block-ui-btn__reorder, .st-block[data-type="image"] .st-block__dropzone .st-block-ui-btn__delete, .st-block[data-type="image"] .st-block__dropzone .st-block-control-ui-btn {
+  height: 120px; }
+
+.st-block[data-type="logo"] .st-block__dropzone .st-icon, .st-block[data-type="logo"] .st-block__dropzone .st-block-ui-btn__reorder, .st-block[data-type="logo"] .st-block__dropzone .st-block-ui-btn__delete, .st-block[data-type="logo"] .st-block__dropzone .st-block-control-ui-btn {
+  height: 80px; }
 
 .st-block__dropzone p {
   text-align: center;
@@ -591,7 +595,7 @@ ul.st-text-block {
 
 .st-block__control-ui {
   position: absolute;
-  height: 10px;
+  height: 40px;
   bottom: 0;
   left: 0;
   opacity: 0; }
@@ -839,13 +843,13 @@ div[data-type="social"] .edit .form-row {
 [data-type="logo"] .st-block__editor, [data-type="image"] .st-block__editor {
   padding: 20px 0; }
 
-[data-type="logo"] {
-  height: 70px !important; }
+[data-type="logo"] .st-block__editor img {
+  height: 80px !important; }
 
-[data-type="image"] {
+[data-type="image"] .st-block__editor img {
   max-height: 400px !important; }
 
-[data-type="unsubscribe"] .st-block__inner, [data-type="poweredby"] .st-block__inner {
+[data-type="unsubscribe"] .st-block__inner, [data-type="poweredby"] .st-block__inner, [data-type="text"] .st-block__inner {
   padding: 10px 0 30px; }
 
 div[data-type="unsubscribe"] .st-block-ui-btn__delete, div[data-type="poweredby"] .st-block-ui-btn__delete {

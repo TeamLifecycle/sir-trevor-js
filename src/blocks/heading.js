@@ -35,21 +35,6 @@ module.exports = Block.extend({
     scribe.on('content-changed', this.toggleEmptyClass.bind(this));
   },
 
-  controls: {
-    'alignleft': function(ev) {
-      this.editor.style["text-align"] = 'left';
-      this.blockStorage.data.align = "left";
-    },
-    'aligncenter': function(ev) {
-      this.editor.style["text-align"] = 'center';
-      this.blockStorage.data.align = "center";
-    },
-    'alignright': function(ev) {
-      this.editor.style["text-align"] = 'right';
-      this.blockStorage.data.align = "right";
-    }
-  },
-
   scribeOptions: { 
     allowBlockElements: true,
     tags: {

@@ -6263,6 +6263,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var Dom = __webpack_require__(69);
 	var Events = __webpack_require__(131);
 	var config = __webpack_require__(68);
+	var EventBus = __webpack_require__(75);
 
 	module.exports = {
 
@@ -6276,6 +6277,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.addUiControl(cmd, this.controls[cmd].bind(this));
 	    }, this);
 	    this.inner.appendChild(this.control_ui);
+	  },
+
+	  controls: {
+	    'alignleft': function alignleft(ev) {
+	      this.editor.style["text-align"] = 'left';
+	      this.blockStorage.data.align = "left";
+	      EventBus.trigger('block:updated');
+	    },
+	    'aligncenter': function aligncenter(ev) {
+	      this.editor.style["text-align"] = 'center';
+	      this.blockStorage.data.align = "center";
+	      EventBus.trigger('block:updated');
+	    },
+	    'alignright': function alignright(ev) {
+	      this.editor.style["text-align"] = 'right';
+	      this.blockStorage.data.align = "right";
+	      EventBus.trigger('block:updated');
+	    }
 	  },
 
 	  getControlTemplate: function getControlTemplate(cmd) {
@@ -19059,7 +19078,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  initialize: function initialize() {},
 
-	  onBlockRender: function onBlockRender() {},
+	  onBlockRender: function onBlockRender() {
+	    if (this.blockStorage.data.align) {
+	      this.editor.style["text-align"] = this.blockStorage.data.align;
+	    }
+	  },
 	  beforeBlockRender: function beforeBlockRender() {},
 
 	  _setBlockInner: function _setBlockInner() {
@@ -20142,6 +20165,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  droppable: true,
 	  uploadable: true,
+	  controllable: true,
 
 	  icon_name: 'image',
 
@@ -20747,6 +20771,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  droppable: true,
 	  uploadable: true,
+	  controllable: true,
 
 	  icon_name: 'image',
 
@@ -20822,11 +20847,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  editorHTML: '<div class="st-unsubscribe-block" style="text-align:center;">Unsubscribe</div>',
 
 	  loadData: function loadData(data) {
-	    if (this.options.convertFromMarkdown && data.format !== "html") {
-	      this.setTextBlockHTML(stToHTML(data.text, this.type));
-	    } else {
-	      this.setTextBlockHTML(data.text);
-	    }
+	    // if (this.options.convertFromMarkdown && data.format !== "html") {
+	    //   // this.setTextBlockHTML(stToHTML(data.text, this.type));
+	    // } else {
+	    //   // this.setTextBlockHTML(data.text);
+	    // }
 	  },
 
 	  scribeOptions: {
@@ -20882,32 +20907,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	  editorHTML: '<div class="st-unsubscribe-block" style="text-align:center;">Powered by <img src="https://s3-us-west-2.amazonaws.com/lifecycle-cdn/email/logo-poweredby.png" alt="Powered By Lifecycle" style="height: 24px;vertical-align: middle;" /></div>',
 
 	  loadData: function loadData(data) {
-	    if (this.options.convertFromMarkdown && data.format !== "html") {
-	      this.setTextBlockHTML(stToHTML(data.text, this.type));
-	    } else {
-	      this.setTextBlockHTML(data.text);
-	    }
+	    // if (this.options.convertFromMarkdown && data.format !== "html") {
+	    //   // this.setTextBlockHTML(stToHTML(data.text, this.type));
+	    // } else {
+	    //   // this.setTextBlockHTML(data.text);
+	    // }
 	  },
 
 	  scribeOptions: {
 	    allowBlockElements: true,
 	    tags: {
 	      p: true
-	    }
-	  },
-
-	  controls: {
-	    'alignleft': function alignleft(ev) {
-	      this.editor.style["text-align"] = 'left';
-	      this.blockStorage.data.align = "left";
-	    },
-	    'aligncenter': function aligncenter(ev) {
-	      this.editor.style["text-align"] = 'center';
-	      this.blockStorage.data.align = "center";
-	    },
-	    'alignright': function alignright(ev) {
-	      this.editor.style["text-align"] = 'right';
-	      this.blockStorage.data.align = "right";
 	    }
 	  }
 

@@ -62,7 +62,11 @@ Object.assign(SimpleBlock.prototype, require('./function-bind'), require('./even
 
   initialize: function() {},
 
-  onBlockRender: function(){},
+  onBlockRender: function(){
+    if(this.blockStorage.data.align) {
+      this.editor.style["text-align"] = this.blockStorage.data.align;
+    }
+  },
   beforeBlockRender: function(){},
 
   _setBlockInner : function() {

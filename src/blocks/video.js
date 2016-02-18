@@ -73,6 +73,13 @@ module.exports = Block.extend({
   onDrop: function(transferData){
     var url = transferData.getData('text/plain');
     this.handleDropPaste(url);
-  }
+  },
+  
+  onBlockRender: function(){
+    // might need this
+    if(this.blockStorage.data.align) {
+      this.editor.style["text-align"] = this.blockStorage.data.align;
+    }
+  },
 });
 

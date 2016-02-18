@@ -36,25 +36,6 @@ module.exports = Block.extend({
     scribe.on('content-changed', this.toggleEmptyClass.bind(this));
   },
 
-  controls: {
-    'alignleft': function(ev) {
-      this.setAlignment("left");
-    },
-    'aligncenter': function(ev) {
-      this.setAlignment("center");
-    },
-    'alignright': function(ev) {
-      this.setAlignment("right");
-    }
-  },
-
-  setAlignment: function(dir) {
-    this.editor.style["text-align"] = dir;
-    this.setData({"align": dir});
-    console.log("setAlignment")
-    EventBus.trigger('block:reorder');
-  },
-
   scribeOptions: { 
     allowBlockElements: true,
     tags: {
