@@ -112,10 +112,10 @@ div[data-type="social"] {
         padding: 20px 0;
 	}
 }
-[data-type="logo"] {
-	height: 70px!important;
+[data-type="logo"] .st-block__editor img {
+	height: 80px!important;
 } 
-[data-type="image"] {
+[data-type="image"] .st-block__editor img {
 	max-height: 400px!important;
 }
 

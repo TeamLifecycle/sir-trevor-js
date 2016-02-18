@@ -32,8 +32,9 @@
 }
 
 .st-block__inner--droppable {
-  border: 1px solid $blocks-control-border-color;
-  background: $blocks-control-bg-color;
+  // remove bg color/border
+  // border: 1px solid $blocks-control-border-color;
+  // background: $blocks-control-bg-color;
   cursor: pointer;
   margin-top: 2em;
   margin-bottom: 2em;
@@ -196,6 +197,12 @@ ul.st-text-block {
   display: block;
   text-align: center;
   margin: 0 auto 0.2em;
+}
+.st-block[data-type="image"] .st-block__dropzone .st-icon { 
+  height: 120px;
+}
+.st-block[data-type="logo"] .st-block__dropzone .st-icon { 
+  height: 80px;
 }
 
 .st-block__dropzone p {
