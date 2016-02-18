@@ -20837,6 +20837,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    tags: {
 	      p: true
 	    }
+	  },
+
+	  onBlockRender: function onBlockRender() {
+	    // need this
+	    if (this.blockStorage.data.align) {
+	      this.editor.style["text-align"] = this.blockStorage.data.align;
+	    }
 	  }
 
 	});
@@ -20873,6 +20880,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    allowBlockElements: true,
 	    tags: {
 	      p: true
+	    }
+	  },
+
+	  onBlockRender: function onBlockRender() {
+	    // need this
+	    if (this.blockStorage.data.align) {
+	      this.editor.style["text-align"] = this.blockStorage.data.align;
 	    }
 	  }
 

@@ -21,6 +21,7 @@ module.exports = Block.extend({
 
   type: "social",
   socialable: true,
+  controllable: true,
   title: function(){ return i18n.t('blocks:social:title'); },
 
 
