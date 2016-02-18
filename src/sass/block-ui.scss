@@ -1,6 +1,6 @@
 .st-block__control-ui {
   position: absolute;
-  height: 50px;
+  height: 10px;
   bottom: 0; left: 0;
   opacity: 0;
   .st-icon {
@@ -75,9 +75,9 @@
   font-size: 1.5em;
   line-height: 1.25em;
   height: 1.25em;
-  border: $default-border;
-  border-left: 0;
-  border-bottom: 0;
+  // border: $default-border;
+  // border-left: 0;
+  // border-bottom: 0;
 }
 
 .st-block--with-errors .st-block-control-ui-btn,
