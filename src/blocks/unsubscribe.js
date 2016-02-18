@@ -30,5 +30,12 @@ module.exports = Block.extend({
     }
   },
 
+  onBlockRender: function(){
+    // need this
+    if(this.blockStorage.data.align) {
+      this.editor.style["text-align"] = this.blockStorage.data.align;
+    }
+  },
+
 });
 

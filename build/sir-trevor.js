@@ -6281,20 +6281,21 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  controls: {
 	    'alignleft': function alignleft(ev) {
-	      this.editor.style["text-align"] = 'left';
-	      this.blockStorage.data.align = "left";
-	      EventBus.trigger('block:updated');
+	      this.setAlignment("left");
 	    },
 	    'aligncenter': function aligncenter(ev) {
-	      this.editor.style["text-align"] = 'center';
-	      this.blockStorage.data.align = "center";
-	      EventBus.trigger('block:updated');
+	      this.setAlignment("center");
 	    },
 	    'alignright': function alignright(ev) {
-	      this.editor.style["text-align"] = 'right';
-	      this.blockStorage.data.align = "right";
-	      EventBus.trigger('block:updated');
+	      this.setAlignment("right");
 	    }
+	  },
+
+	  setAlignment: function setAlignment(dir) {
+	    this.editor.style["text-align"] = dir;
+	    this.setData({ "align": dir });
+	    console.log("setAlignment");
+	    EventBus.trigger('block:updated');
 	  },
 
 	  getControlTemplate: function getControlTemplate(cmd) {
@@ -18508,25 +18509,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    scribe.on('content-changed', this.toggleEmptyClass.bind(this));
 	  },
 
-	  controls: {
-	    'alignleft': function alignleft(ev) {
-	      this.setAlignment("left");
-	    },
-	    'aligncenter': function aligncenter(ev) {
-	      this.setAlignment("center");
-	    },
-	    'alignright': function alignright(ev) {
-	      this.setAlignment("right");
-	    }
-	  },
-
-	  setAlignment: function setAlignment(dir) {
-	    this.editor.style["text-align"] = dir;
-	    this.setData({ "align": dir });
-	    console.log("setAlignment");
-	    EventBus.trigger('block:reorder');
-	  },
-
 	  scribeOptions: {
 	    allowBlockElements: true,
 	    tags: {
@@ -20187,6 +20169,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.onDrop(ev.currentTarget);
 	      }).bind(this));
 	    }).bind(this));
+	    // need this
+	    if (this.blockStorage.data.align) {
+	      this.editor.style["text-align"] = this.blockStorage.data.align;
+	    }
 	  },
 
 	  onDrop: function onDrop(transferData) {
@@ -20254,21 +20240,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    scribe.use(new ScribeQuotePlugin(this));
 
 	    scribe.on('content-changed', this.toggleEmptyClass.bind(this));
-	  },
-
-	  controls: {
-	    'alignleft': function alignleft(ev) {
-	      this.editor.style["text-align"] = 'left';
-	      this.blockStorage.data.align = "left";
-	    },
-	    'aligncenter': function aligncenter(ev) {
-	      this.editor.style["text-align"] = 'center';
-	      this.blockStorage.data.align = "center";
-	    },
-	    'alignright': function alignright(ev) {
-	      this.editor.style["text-align"] = 'right';
-	      this.blockStorage.data.align = "right";
-	    }
 	  },
 
 	  scribeOptions: {
@@ -20750,6 +20721,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  onDrop: function onDrop(transferData) {
 	    var url = transferData.getData('text/plain');
 	    this.handleDropPaste(url);
+	  },
+
+	  onBlockRender: function onBlockRender() {
+	    // might need this
+	    if (this.blockStorage.data.align) {
+	      this.editor.style["text-align"] = this.blockStorage.data.align;
+	    }
 	  }
 	});
 
@@ -20793,6 +20771,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.onDrop(ev.currentTarget);
 	      }).bind(this));
 	    }).bind(this));
+	    // need this
+	    if (this.blockStorage.data.align) {
+	      this.editor.style["text-align"] = this.blockStorage.data.align;
+	    }
 	  },
 
 	  onDrop: function onDrop(transferData) {
@@ -20847,11 +20829,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  editorHTML: '<div class="st-unsubscribe-block" style="text-align:center;">Unsubscribe</div>',
 
 	  loadData: function loadData(data) {
-	    // if (this.options.convertFromMarkdown && data.format !== "html") {
-	    //   // this.setTextBlockHTML(stToHTML(data.text, this.type));
-	    // } else {
-	    //   // this.setTextBlockHTML(data.text);
-	    // }
+	    // no data to load
 	  },
 
 	  scribeOptions: {
@@ -20859,25 +20837,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    tags: {
 	      p: true
 	    }
-	  },
-
-	  controls: {
-	    'alignleft': function alignleft(ev) {
-	      this.setAlignment("left");
-	    },
-	    'aligncenter': function aligncenter(ev) {
-	      this.setAlignment("center");
-	    },
-	    'alignright': function alignright(ev) {
-	      this.setAlignment("right");
-	    }
-	  },
-
-	  setAlignment: function setAlignment(dir) {
-	    this.editor.style["text-align"] = dir;
-	    this.setData({ "align": dir });
-	    console.log("setAlignment");
-	    EventBus.trigger('block:reorder');
 	  }
 
 	});
@@ -20907,11 +20866,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  editorHTML: '<div class="st-unsubscribe-block" style="text-align:center;">Powered by <img src="https://s3-us-west-2.amazonaws.com/lifecycle-cdn/email/logo-poweredby.png" alt="Powered By Lifecycle" style="height: 24px;vertical-align: middle;" /></div>',
 
 	  loadData: function loadData(data) {
-	    // if (this.options.convertFromMarkdown && data.format !== "html") {
-	    //   // this.setTextBlockHTML(stToHTML(data.text, this.type));
-	    // } else {
-	    //   // this.setTextBlockHTML(data.text);
-	    // }
+	    // no data to load
 	  },
 
 	  scribeOptions: {
@@ -20972,6 +20927,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    this.$('.display')[0].classList.remove("hide");
 	    this.$('.edit')[0].classList.add("hide");
+	  },
+
+	  onBlockRender: function onBlockRender() {
+	    // might need this
+	    if (this.blockStorage.data.align) {
+	      this.editor.style["text-align"] = this.blockStorage.data.align;
+	    }
 	  },
 
 	  onContentSubmit: function onContentSubmit(data) {

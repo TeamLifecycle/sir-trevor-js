@@ -39,7 +39,7 @@ module.exports = {
     this.editor.style["text-align"] = dir;
     this.setData({"align": dir});
     console.log("setAlignment")
-    EventBus.trigger('block:reorder');
+    EventBus.trigger('block:updated');
   },
   
   getControlTemplate: function(cmd) {
