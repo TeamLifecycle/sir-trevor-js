@@ -106,12 +106,17 @@ div[data-type="social"] {
 // logo size
 [data-type="logo"], [data-type="image"] {
 	img {
-	    height: 50px!important;
 	    width: inherit!important;
 	}
 	.st-block__editor {
         padding: 20px 0;
 	}
+}
+[data-type="logo"] {
+	height: 70px!important;
+} 
+[data-type="image"] {
+	max-height: 400px!important;
 }
 
 [data-type="unsubscribe"], [data-type="poweredby"] {
